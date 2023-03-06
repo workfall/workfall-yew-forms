@@ -1,0 +1,68 @@
+/* theme */
+$primary-color: #32b089;
+$text-color: #444544;
+$text-color-bg-primary: rgb(233, 233, 233);
+$dark-color: #111111;
+$light-gray: #b6b6b6;
+$light-blue: #00a8ff;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* General components */
+input[type="text"], input[type="password"], input[type="email"] {
+  border: 2px solid $light-gray;
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 100%;
+  &:focus {
+    outline: none;
+    border-color: $light-blue;
+  }
+  &.error {
+    border-color: red;
+  }
+}
+
+/* Buttons styles */
+
+.button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-primary {
+  background-color: $primary-color;
+  color: $text-color-bg-primary;
+}
+
+/* Layout */
+main {
+  font-family: 'Nunito', sans-serif;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  .registration-form {
+    width: 50%;
+  }
+}

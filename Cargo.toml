@@ -1,0 +1,23 @@
+[package]
+name = "form-handling"
+version = "0.1.0"
+edition = "2021"
+description = "Yew form handling example"
+readme = "README.md"
+repository = "https://github.com/yewstack/yew-trunk-minimal-template"
+license = "MIT OR Apache-2.0"
+keywords = ["yew", "trunk"]
+categories = ["gui", "wasm", "web-programming"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+log = "0.4.6"
+wasm-bindgen = "0.2.84"
+wasm-logger = "0.2.0"
+web-sys = "0.3.61"
+yew = { version="0.20", features=["csr"] }
+yew-router = "0.17"
+serde = "1.0.152"
+serde_json = "1.0.94"
+gloo-net = "0.2.6"
+wasm-bindgen-futures = "0.4"
