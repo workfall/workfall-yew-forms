@@ -1,8 +1,8 @@
-use gloo_net::http::{Request, Headers};
+use gloo_net::http::{Headers, Request};
 use serde::{Deserialize, Serialize};
 use serde_json;
 use wasm_bindgen::JsValue;
-use web_sys::{HtmlInputElement};
+use web_sys::HtmlInputElement;
 
 use yew::prelude::*;
 
@@ -29,6 +29,8 @@ pub fn home() -> Html {
     let password_ref = use_node_ref();
     let confirm_password_ref = use_node_ref();
 
+    let password_is_valid = use_state(|| true);
+
     log::info!("registration_form {:?}", &registration_form.clone());
     let onsubmit = {
         let registration_form = registration_form.clone();
@@ -39,6 +41,9 @@ pub fn home() -> Html {
         let email_ref = email_ref.clone();
         let password_ref = password_ref.clone();
         let confirm_password_ref = confirm_password_ref.clone();
+
+        // let form_is_valid = form_is_valid.clone();
+        let password_is_valid = password_is_valid.clone();
 
         Callback::from(move |event: SubmitEvent| {
             event.prevent_default();
@@ -53,6 +58,13 @@ pub fn home() -> Html {
                 .cast::<HtmlInputElement>()
                 .unwrap()
                 .value();
+
+            if password != confirm_password {
+                password_is_valid.set(false);
+                return;
+            } else {
+                password_is_valid.set(true);
+            };
 
             let registration_form = RegistrationForm {
                 username,
@@ -96,6 +108,7 @@ pub fn home() -> Html {
                 <InputField input_node_ref={email_ref} label={"Email".to_owned()} name={"email".clone()} field_type={"email".clone()}  />
                 <InputField input_node_ref={password_ref} label={"Password".to_owned()} name={"password".clone()} field_type={"password".clone()}  />
                 <InputField input_node_ref={confirm_password_ref} label={"Confirm Password".to_owned()} name={"confirm_password".clone()} field_type={"password".clone()}  />
+                <p class="error-text">{ if *password_is_valid { "" } else { "Passwords do not match" } }</p>
                 <button type="submit" class="button button-primary">{"Submit"}</button>
             </form>
         </main>
